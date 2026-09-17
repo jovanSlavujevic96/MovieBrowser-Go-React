@@ -1,7 +1,6 @@
 import { Component } from 'react';
 
 export default class AppClass extends Component {
-
     // mandatory method for every class which extends `Component`
     render() {
         return (
