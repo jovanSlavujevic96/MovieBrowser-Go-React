@@ -8,6 +8,7 @@ services:
       - "8080:8080"
     volumes:
       - ./backend:/app
+      - ./.devcontainer/backend:/app/.devcontainer
 
   frontend:
     build:
@@ -20,3 +21,4 @@ services:
       - "5173:5173"
     volumes:
       - ./frontend:/app
+      - ./.devcontainer/frontend:/app/.devcontainer
