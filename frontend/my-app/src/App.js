@@ -1,9 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./App.css";
+import Input from "./Input";
 
 function App(props) {
   const [isTrue, setIsTrue] = useState(false);
   const [crowd, setCrowd] = useState([]);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
 
   useEffect(() => {
     console.log("useEffect fired!");
@@ -51,6 +56,47 @@ function App(props) {
       >
         Toggle isTrue
       </button>
+      <hr />
+      <form autoComplete="off">
+        <div className="mb-3">
+          <label className="form-label" htmlFor="first-name">
+            First Name
+          </label>
+          <input
+            type="text"
+            name="first-name"
+            id="first-name"
+            autoComplete="first-name-new"
+            className="form-control"
+            onChange={(event) => setFirstName(event.target.value)}
+          ></input>
+        </div>
+      </form>
+
+      <Input
+        title="Last Name"
+        type="text"
+        name="last-name"
+        autoComplete="last-name-new"
+        className="form-control"
+        onChange={(event) => setLastName(event.target.value)}
+      ></Input>
+
+      <Input
+        title="Date of Birth"
+        type="date"
+        name="dob"
+        autoComplete="dob-new"
+        className="form-control"
+        onChange={(event) => setDob(event.target.value)}
+      ></Input>
+
+      <div>
+        First Name: {firstName} <br />
+        Last Name: {lastName} <br />
+        DOB: {dob} <br />
+      </div>
+
       <hr />
       <h3>People</h3>
       <ul className="list-group">
