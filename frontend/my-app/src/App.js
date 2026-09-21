@@ -33,6 +33,38 @@ function App(props) {
     setCrowd(people);
   }, []);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (lastName !== "") {
+      addPerson(firstName, lastName, dob);
+    }
+  };
+
+  const addPerson = (newFirst, newLast, newDob) => {
+    // create the object
+    let newPerson = {
+      id: crowd.length + 1,
+      firstName: newFirst,
+      lastName: newLast,
+      dob: newDob,
+    };
+
+    const newLIst = crowd.concat(newPerson);
+
+    const sorted = newLIst.sort((a, b) => {
+      if (a.lastName < b.lastName) {
+        return -1;
+      } else if (a.lastName > b.lastName) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    setCrowd(sorted);
+  };
+
   return (
     // <hr/> - horizontal rule
     <Fragment>
@@ -57,7 +89,7 @@ function App(props) {
         Toggle isTrue
       </button>
       <hr />
-      <form autoComplete="off">
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label" htmlFor="first-name">
             First Name
@@ -71,25 +103,27 @@ function App(props) {
             onChange={(event) => setFirstName(event.target.value)}
           ></input>
         </div>
+
+        <Input
+          title="Last Name"
+          type="text"
+          name="last-name"
+          autoComplete="last-name-new"
+          className="form-control"
+          onChange={(event) => setLastName(event.target.value)}
+        ></Input>
+
+        <Input
+          title="Date of Birth"
+          type="date"
+          name="dob"
+          autoComplete="dob-new"
+          className="form-control"
+          onChange={(event) => setDob(event.target.value)}
+        ></Input>
+
+        <input type="submit" value="Submit" className="btn btn-primary"></input>
       </form>
-
-      <Input
-        title="Last Name"
-        type="text"
-        name="last-name"
-        autoComplete="last-name-new"
-        className="form-control"
-        onChange={(event) => setLastName(event.target.value)}
-      ></Input>
-
-      <Input
-        title="Date of Birth"
-        type="date"
-        name="dob"
-        autoComplete="dob-new"
-        className="form-control"
-        onChange={(event) => setDob(event.target.value)}
-      ></Input>
 
       <div>
         First Name: {firstName} <br />
